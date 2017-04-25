@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FTaoBao</string>
+    <string name="action_settings">Settings</string>
+    <string name="fragment1">fragment1</string>
+    <string name="fragment2">fragment2</string>
+    <string name="fragment3">fragment3</string>
+    <string name="fragment4">fragment4</string>
+    <string name="fragment5">fragment5</string>
+</resources>
