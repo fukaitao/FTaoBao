@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         navScaleAnim = AnimationUtils.loadAnimation(this, R.anim.nav_scale_anim);
         fragmentManager = getFragmentManager();
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-        radioNavHome = (RadioButton) findViewById(R.id.adio_nav_home);
-        radioNavWeitao = (RadioButton) findViewById(R.id.radioButton2);
-        radioNavAsk = (RadioButton) findViewById(R.id.radioButton3);
-        radioNavCart = (RadioButton) findViewById(R.id.radioButton4);
-        radioNavMy = (RadioButton) findViewById(R.id.radioButton5);
+        radioNavHome = (RadioButton) findViewById(R.id.rb_nav_home);
+        radioNavWeitao = (RadioButton) findViewById(R.id.rb_nav_weitao);
+        radioNavAsk = (RadioButton) findViewById(R.id.rb_nav_ask);
+        radioNavCart = (RadioButton) findViewById(R.id.rb_nav_cart);
+        radioNavMy = (RadioButton) findViewById(R.id.rb_nav_my);
         radioGroup.setOnCheckedChangeListener(new onCheckedChanged());
         radioNavHome.setChecked(true);
     }
