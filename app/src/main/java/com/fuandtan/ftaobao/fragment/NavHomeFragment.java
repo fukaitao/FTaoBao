@@ -12,20 +12,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuandtan.ftaobao.R;
+import com.fuandtan.ftaobao.utils.Utils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author  kaitao.fu
+ * @Date 2017-05-07
+ */
 
 public class NavHomeFragment extends Fragment {
     private RecyclerView recyclerView;
+    //装载 RecyclerView的数据集合
     private List<String> mData;
+    //适配器
     private RecyclerViewAdapter recycleViewAdapter;
     private int mOrientation;
+    //状态栏布局
+    private LinearLayout statusBar;
     /*
     fragment 生命周期：onAttach -->onCreate-->onCreateView-->onActivityCreated-->onStart()-->onResume------fragment active
     onPause()-->onStop()-->onDestroyView()-->onDestroy()-->onDetach()-----fragment is Destroyed
@@ -34,6 +45,10 @@ public class NavHomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    /**
+     * RecyclerView 得到数据方法
+     */
     private void getData(){
         mData = new ArrayList<String>();
         for(int i=0;i<100;i++){
@@ -43,13 +58,26 @@ public class NavHomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        //获取 RecyclerView 数据
         getData();
         recyclerView = (RecyclerView)getActivity().findViewById(R.id.recycleview);
 //        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+        //设置RecyclerView的布局显示方式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recycleViewAdapter = new RecyclerViewAdapter());
+        //设置RecyclerView的分割线
         recyclerView.addItemDecoration(new RecyclerViewItem(getActivity(), LinearLayoutManager.VERTICAL));
+        //得到状态栏布局对象
+        statusBar = (LinearLayout)getActivity().findViewById(R.id.ll_normal_status_bar);
+        //动态de设置状态高度为得到的状态栏高度
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) statusBar.getLayoutParams();
+        params.height = Utils.getStatusBarHeight(getActivity());
+        statusBar.setLayoutParams(params);
     }
+
+    /**
+     * RecyclerView 分割线绘制
+     */
     class RecyclerViewItem extends RecyclerView.ItemDecoration{
         private int[] ATTRS = new int[]{android.R.attr.listDivider};
         private int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
@@ -84,6 +112,11 @@ public class NavHomeFragment extends Fragment {
             }
         }
 
+        /**
+         * 竖直方向的分割线
+         * @param c
+         * @param parent
+         */
         private void drawVertical(Canvas c, RecyclerView parent){
             final int left = parent.getPaddingLeft();
             final int right = parent.getWidth()-parent.getPaddingRight();
@@ -98,6 +131,11 @@ public class NavHomeFragment extends Fragment {
             }
         }
 
+        /**
+         * 水平方向的分割线
+         * @param c
+         * @param parent
+         */
         private void drawHorizontal(Canvas c,RecyclerView parent){
             final int top = parent.getPaddingTop();
             final int bottom = parent.getHeight()-parent.getPaddingBottom();

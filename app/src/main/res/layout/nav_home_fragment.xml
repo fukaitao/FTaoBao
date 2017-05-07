@@ -1,14 +1,16 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.NavHomeFragment">
-
+    tools:context=".fragment.NavHomeFragment"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/normal_status_bar"/>
     <include layout="@layout/nav_home_actionbar" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-</FrameLayout>
+</LinearLayout>

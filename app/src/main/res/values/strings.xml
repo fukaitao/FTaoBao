@@ -6,4 +6,5 @@
     <string name="fragment3">fragment3</string>
     <string name="fragment4">fragment4</string>
     <string name="fragment5">fragment5</string>
+    <string name="nav_home_search_hint">搜一搜你会发现</string>
 </resources>
