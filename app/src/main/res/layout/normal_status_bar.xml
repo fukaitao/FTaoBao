@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="11dp"
-    android:background="@drawable/nav_home_actionbar_bg"
+    android:background="@drawable/actionbar_bg"
     android:id="@+id/ll_normal_status_bar"
     >
 </LinearLayout>

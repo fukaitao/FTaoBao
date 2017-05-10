@@ -7,4 +7,11 @@
     <string name="fragment4">fragment4</string>
     <string name="fragment5">fragment5</string>
     <string name="nav_home_search_hint">搜一搜你会发现</string>
+
+    <!--weitao-->
+    <string name="weitao">微淘</string>
+    <string name="weitao_dynamic">关注动态</string>
+    <string name="weitao_new">宝贝上新</string>
+    <string name="weitao_direct_seeding">视频直播</string>
+    <string name="weitao_hot_topic">精选热榜</string>
 </resources>

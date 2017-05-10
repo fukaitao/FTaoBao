@@ -1,18 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment2"
+    android:orientation="vertical"
     tools:context=".fragment.NavWeitaoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fragment2"
-        android:gravity="center"
-        android:textSize="33sp"
-        android:background="#00ff59"
-        />
+    <!--状态栏-->
+    <include layout="@layout/normal_status_bar" />
+    <!--标题栏-->
+    <include
+        android:id="@+id/tf_app_bar_layout"
+        layout="@layout/nav_weitao_actionbar" />
 
-</FrameLayout>
+    <!--数据展示-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tf_tab_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

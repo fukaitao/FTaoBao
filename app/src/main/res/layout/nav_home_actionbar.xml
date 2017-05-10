@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_gravity="top"
-    android:background="@drawable/nav_home_actionbar_bg"
+    android:background="@drawable/actionbar_bg"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
             android:text="扫一扫"
-            android:textColor="@color/actionbar"
+            android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="消息"
-            android:textColor="@color/actionbar"
+            android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>
