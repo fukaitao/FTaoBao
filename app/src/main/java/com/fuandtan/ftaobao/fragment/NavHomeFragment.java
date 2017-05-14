@@ -17,9 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuandtan.ftaobao.R;
+import com.fuandtan.ftaobao.adapter.RecyclerViewDifferentItemTypeAdapter;
 import com.fuandtan.ftaobao.utils.Utils;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +37,7 @@ public class NavHomeFragment extends Fragment {
     private int mOrientation;
     //状态栏布局
     private LinearLayout statusBar;
+    private RecyclerViewDifferentItemTypeAdapter adapter;
     /*
     fragment 生命周期：onAttach -->onCreate-->onCreateView-->onActivityCreated-->onStart()-->onResume------fragment active
     onPause()-->onStop()-->onDestroyView()-->onDestroy()-->onDetach()-----fragment is Destroyed
@@ -64,9 +65,11 @@ public class NavHomeFragment extends Fragment {
 //        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         //设置RecyclerView的布局显示方式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(recycleViewAdapter = new RecyclerViewAdapter());
+        recycleViewAdapter = new RecyclerViewAdapter();
+        adapter = new RecyclerViewDifferentItemTypeAdapter(mData);
+        recyclerView.setAdapter(adapter);
         //设置RecyclerView的分割线
-        recyclerView.addItemDecoration(new RecyclerViewItem(getActivity(), LinearLayoutManager.VERTICAL));
+        //recyclerView.addItemDecoration(new RecyclerViewItem(getActivity(), LinearLayoutManager.VERTICAL));
         //得到状态栏布局对象
         statusBar = (LinearLayout)getActivity().findViewById(R.id.ll_normal_status_bar);
         //动态de设置状态高度为得到的状态栏高度

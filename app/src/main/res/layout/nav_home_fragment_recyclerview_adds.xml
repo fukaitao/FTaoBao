@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="128dp">
+    <!--
+    轮播广告高度是通过动态设置布局高度的方法
+    （高度为px，然后通过恰当的px转换为dp而来）
+    -->
+    <!-- 主题图片 -->
+    <com.fuandtan.ftaobao.view.SlideBannerView
+        android:id="@+id/slideshowView"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
