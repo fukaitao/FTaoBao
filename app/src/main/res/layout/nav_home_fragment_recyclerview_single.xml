@@ -15,62 +15,17 @@
             android:padding="5dp"
             android:layout_marginLeft="10dp"
             />
-        <LinearLayout
+        <ViewFlipper
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="热议"
-                    android:textColor="#EF6270"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="都说女人有体香，你知道体香是怎么来的吗"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="最新"
-                    android:textColor="#EF6270"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="太厉害了我的小米6手机连接2个Wi-Fi"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    />
-            </LinearLayout>
-        </LinearLayout>
+            android:id="@+id/vf_marquee_text"
+            android:autoStart="true"
+            android:background="#fff"
+            android:flipInterval="2500"
+            android:inAnimation="@anim/nav_textview_marquee_in"
+            android:outAnimation="@anim/nav_textview_marquee_out"
+            ></ViewFlipper>
     </LinearLayout>
-   <ImageView
-       android:layout_width="match_parent"
-       android:layout_height="10dp"
-       android:background="#F4F4F4"
-       />
+
 
 </LinearLayout>

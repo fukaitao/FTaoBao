@@ -6,8 +6,19 @@
     <string name="fragment3">fragment3</string>
     <string name="fragment4">fragment4</string>
     <string name="fragment5">fragment5</string>
+    <!-- home -->
     <string name="nav_home_search_hint">搜一搜你会发现</string>
-
+    <string name="nav_home_classify_tianmao">天猫</string>
+    <string name="nav_home_classify_juhuasuan">聚划算</string>
+    <string name="nav_home_classify_tianmaoguoji">天猫国际</string>
+    <string name="nav_home_classify_waimai">外卖</string>
+    <string name="nav_home_classify_tianmaochaoshi">天猫超市</string>
+    <string name="nav_home_classify_chongzhizhongxin">充值中心</string>
+    <string name="nav_home_classify_feizhulvxing">飞猪旅行</string>
+    <string name="nav_home_classify_lingjingbi">领金币</string>
+    <string name="nav_home_classify_paimai">拍卖</string>
+    <string name="nav_home_classify_fenlei">分类</string>
+    <!-- home -->
     <!--weitao-->
     <string name="weitao">微淘</string>
     <string name="weitao_dynamic">关注动态</string>

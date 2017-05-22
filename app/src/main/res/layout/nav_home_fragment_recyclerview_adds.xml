@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="128dp">
+    android:layout_height="128dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--
     轮播广告高度是通过动态设置布局高度的方法
     （高度为px，然后通过恰当的px转换为dp而来）
     -->
     <!-- 主题图片 -->
-    <com.fuandtan.ftaobao.view.SlideBannerView
+    <!--<com.fuandtan.ftaobao.view.SlideBannerView
         android:id="@+id/slideshowView"
         android:layout_width="fill_parent"
         android:layout_height="180dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
+    <com.fuandtan.ftaobao.view.SliderLayout
+        android:id="@+id/main_layout_taobao"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@android:color/white"
+        app:sl_default_image="@drawable/ic_default"
+        app:sl_indicator_margin="12dp"
+        app:sl_indicator_position="centerBottom"
+        app:sl_indicator_shape="oval"
+        app:sl_indicator_space="3dp"
+        app:sl_selected_indicator_color="@android:color/holo_orange_dark"
+        app:sl_selected_indicator_height="6dp"
+        app:sl_selected_indicator_width="6dp"
+        app:sl_unselected_indicator_color="@color/unselected_color"
+        app:sl_unselected_indicator_height="6dp"
+        app:sl_unselected_indicator_width="6dp"
+        android:visibility="gone"></com.fuandtan.ftaobao.view.SliderLayout>
 </RelativeLayout>

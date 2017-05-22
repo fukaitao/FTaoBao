@@ -3,4 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="sl_selected_indicator_height">10dp</dimen>
+    <dimen name="sl_selected_indicator_width">10dp</dimen>
+    <dimen name="sl_unselected_indicator_height">10dp</dimen>
+    <dimen name="sl_unselected_indicator_width">10dp</dimen>
+    <dimen name="sl_indicator_padding">6dp</dimen>
+    <dimen name="sl_indicator_margin">6dp</dimen>
+    <dimen name="sl_arc_height">10dp</dimen>
 </resources>

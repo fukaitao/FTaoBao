@@ -66,7 +66,7 @@ public class NavHomeFragment extends Fragment {
         //设置RecyclerView的布局显示方式
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recycleViewAdapter = new RecyclerViewAdapter();
-        adapter = new RecyclerViewDifferentItemTypeAdapter(mData);
+        adapter = new RecyclerViewDifferentItemTypeAdapter(mData,getActivity());
         recyclerView.setAdapter(adapter);
         //设置RecyclerView的分割线
         //recyclerView.addItemDecoration(new RecyclerViewItem(getActivity(), LinearLayoutManager.VERTICAL));
