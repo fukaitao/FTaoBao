@@ -3,12 +3,10 @@ package com.fuandtan.ftaobao.fragment;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,17 +16,18 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fuandtan.ftaobao.R;
+import com.fuandtan.ftaobao.adapter.WeitaoViewPagerAdapter;
+import com.fuandtan.ftaobao.adapter.WeitaoViewPagerItemAdapter1;
+import com.fuandtan.ftaobao.model.WeitaoItem;
 import com.fuandtan.ftaobao.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class NavWeitaoFragment extends Fragment implements Animator.AnimatorListener {
     // 总布局
@@ -50,16 +49,22 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
     private TextView tv_weitao_direct_seeding;
     private TextView tv_weitao_hot_topic;
 
-    // 数据内容布局
+    // 数据页卡布局
+    private ViewPager viewPager;
+    private List<View> weitaoViewList;
+    private View weitaoView1;
+    private View weitaoView2;
+    private View weitaoView3;
+    private View weitaoView4;
+    private WeitaoViewPagerAdapter weitaoViewPagerAdapter;// 页卡适配器
+
+    // 数据页布局
+    private List<WeitaoItem> weitaoItemList;
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;// 数据适配器
-    private ListView tf_tab_page;// 数据页面
-    private List<String> items;// 数据项
-    private int mOrientation;// 数据走向
+    private WeitaoViewPagerItemAdapter1 weitaoViewPagerItemAdapter1;// 数据页构造器
 
     // 状态栏布局
     private LinearLayout statusBar;
-
     // 标题栏
     private boolean toTop;
     private boolean isActionbarHide;
@@ -87,11 +92,14 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
     }
 
     private void initData() {
-        items = new ArrayList<String>();
+        weitaoItemList = new ArrayList<WeitaoItem>();
+        WeitaoItem weitaoItem;
         String str;
-        for (int i = 1; i < 666; i++) {
-            str = "000" + i;
-            items.add(str.substring(str.length() - 3, str.length()));
+        for (int i = 0; i < 333; i++) {
+            str = "0000" + i;
+            str = str.substring(str.length() - 3, str.length());
+            weitaoItem = new WeitaoItem(R.drawable.ic_launcher, "第" + str + "项", "标题" + i, "副标题" + i);
+            weitaoItemList.add(weitaoItem);
         }
     }
 
@@ -105,8 +113,6 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
     }
 
     private void initView() {
-        tf_app_bar_layout = (LinearLayout) weitaoView.findViewById(R.id.tf_app_bar_layout);
-
         //得到状态栏布局对象
         statusBar = (LinearLayout) weitaoView.findViewById(R.id.ll_normal_status_bar);
         //动态de设置状态高度为得到的状态栏高度
@@ -114,8 +120,10 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
         params.height = Utils.getStatusBarHeight(getActivity());
         statusBar.setLayoutParams(params);
 
+        tf_app_bar_layout = (LinearLayout) weitaoView.findViewById(R.id.tf_app_bar_layout);// statusbar + actionbar + tabbar
+
         // 标题栏布局实例化
-        tf_action_bar_layout = (LinearLayout) weitaoView.findViewById(R.id.tf_action_bar_layout);
+        tf_action_bar_layout = (LinearLayout) weitaoView.findViewById(R.id.tf_action_bar_layout);// actionbar + tabbar
         tf_action_bar = (RelativeLayout) weitaoView.findViewById(R.id.tf_action_bar);
         tf_tab_bar = (LinearLayout) weitaoView.findViewById(R.id.tf_tab_bar);
         // tab_bar图标实例化
@@ -129,18 +137,41 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
         tv_weitao_direct_seeding = (TextView) weitaoView.findViewById(R.id.tv_weitao_direct_seeding);
         tv_weitao_hot_topic = (TextView) weitaoView.findViewById(R.id.tv_weitao_hot_topic);
 
-        // 数据内容布局实例化
-        recyclerView = (RecyclerView) weitaoView.findViewById(R.id.tf_tab_page);
+        // 页卡初始化
+        weitaoViewList = new ArrayList<View>();
+        weitaoView1 = View.inflate(getActivity(), R.layout.nav_weitao_viewpager1, null);
+        weitaoView2 = View.inflate(getActivity(), R.layout.nav_weitao_viewpager2, null);
+        weitaoView3 = View.inflate(getActivity(), R.layout.nav_weitao_viewpager3, null);
+        weitaoView4 = View.inflate(getActivity(), R.layout.nav_weitao_viewpager4, null);
+        weitaoViewList.add(weitaoView1);
+        weitaoViewList.add(weitaoView2);
+        weitaoViewList.add(weitaoView3);
+        weitaoViewList.add(weitaoView4);
+        weitaoViewPagerAdapter = new WeitaoViewPagerAdapter(getActivity(), weitaoViewList);
+
+        viewPager = (ViewPager) weitaoView.findViewById(R.id.tf_tab_page);
+        viewPager.setAdapter(weitaoViewPagerAdapter);
+
+        initWeitaoView1();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //设置RecyclerView布局显示方式
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(recyclerViewAdapter = new RecyclerViewAdapter());
-        //设置RecyclerView的分割线
-        recyclerView.addItemDecoration(new RecyclerViewItem(getActivity(), LinearLayoutManager.VERTICAL));
+    private void initWeitaoView1() {
+        // 页面初始化
+        recyclerView = (RecyclerView) weitaoView1.findViewById(R.id.rv_weitao_viewpager1);
+        // 设置布局显示方式，这里我使用都是垂直方式——LinearLayoutManager.VERTICAL
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        // 设置添加删除item的时候的动画效果
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        weitaoViewPagerItemAdapter1 = new WeitaoViewPagerItemAdapter1(getActivity(), weitaoItemList);
+        recyclerView.setAdapter(weitaoViewPagerItemAdapter1);
+//        recyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                Log.d("txxz", "scrollX:" + scrollX + "  scrollY:" + scrollY + "  oldScrollX:" + oldScrollX + "  oldScrollY:" + oldScrollY);
+//            }
+//        });
+//    }
+
         recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -213,139 +244,13 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
         RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         layoutParam.setMargins(0, page, 0, 0);
-        recyclerView.setLayoutParams(layoutParam);
-        recyclerView.invalidate();
+        viewPager.setLayoutParams(layoutParam);
+        viewPager.invalidate();
     }
 
-    /**
-     * RecyclerView 分割线绘制
-     */
-    class RecyclerViewItem extends RecyclerView.ItemDecoration {
-        private int[] ATTRS = new int[]{android.R.attr.listDivider};
-        private int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
-        private int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
-        private Drawable mDivider;
-
-        public RecyclerViewItem(Context context, int orientation) {
-            final TypedArray typedArray = context.obtainStyledAttributes(ATTRS);
-            mDivider = typedArray.getDrawable(0);
-            typedArray.recycle();
-            setOrientation(orientation);
-        }
-
-        private void setOrientation(int orientation) {
-            mOrientation = orientation;
-        }
-
-        @Override
-        public void onDraw(Canvas c, RecyclerView parent) {
-            super.onDraw(c, parent);
-            if (mOrientation == VERTICAL_LIST) {
-                drawVertical(c, parent);
-            } else {
-                drawHorizontal(c, parent);
-            }
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
-            if (mOrientation == VERTICAL_LIST) {
-                outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
-            } else {
-                outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
-            }
-        }
-
-        /**
-         * 竖直方向的分割线
-         *
-         * @param c
-         * @param parent
-         */
-        private void drawVertical(Canvas c, RecyclerView parent) {
-            final int left = parent.getPaddingLeft();
-            final int right = parent.getWidth() - parent.getPaddingRight();
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int top = child.getBottom() + params.bottomMargin;
-                final int bottom = top + mDivider.getIntrinsicHeight();
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(c);
-            }
-        }
-
-        /**
-         * 水平方向的分割线
-         *
-         * @param c
-         * @param parent
-         */
-        private void drawHorizontal(Canvas c, RecyclerView parent) {
-            final int top = parent.getPaddingTop();
-            final int bottom = parent.getHeight() - parent.getPaddingBottom();
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-                final int left = child.getRight() + params.rightMargin;
-                final int right = left + mDivider.getIntrinsicWidth();
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(c);
-
-            }
-        }
-    }
-
-    /**
-     * itemList数据适配器
-     */
-    class RecyclerViewAdapter extends RecyclerView.Adapter<WeitaoViewHolder> {
-
-        @Override
-        public WeitaoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            WeitaoViewHolder weitaoViewHolder = new WeitaoViewHolder(LayoutInflater.from(getActivity()).inflate(R.layout.nav_weitao_item, parent, false));
-            return weitaoViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(final WeitaoViewHolder holder, int position) {
-            holder.tv_item_weitao.setText(items.get(position));
-            holder.tv_item_weitao.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getActivity(), "click ：" + holder.tv_item_weitao.getText(), Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
-    }
-    
-    /**
-     * itemView持有类
-     */
-    class WeitaoViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_item_weitao;
-
-        public WeitaoViewHolder(View itemView) {
-            super(itemView);
-            tv_item_weitao = (TextView) itemView.findViewById(R.id.tv_item_weitao);
-        }
-    }
-
-    /**
-     * actionbar操作动画
-     *
-     * @param animation
-     */
     @Override
     public void onAnimationStart(Animator animation) {
-        Log.d("txxz", "onAnimationStart()--toTop:" + toTop + "  isActionbarHide:" + isActionbarHide);
+
     }
 
     @Override
@@ -356,7 +261,6 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
             setMarginTop(tf_app_bar_layout.getHeight());
         else
             setMarginTop(tf_app_bar_layout.getHeight() - tf_action_bar.getHeight());
-        mIsAnim = false;
     }
 
     @Override
@@ -368,4 +272,5 @@ public class NavWeitaoFragment extends Fragment implements Animator.AnimatorList
     public void onAnimationRepeat(Animator animation) {
 
     }
+
 }
