@@ -1,152 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tf_app_bar_layout"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="top"
     android:orientation="vertical">
 
-    <!--一级标题栏-->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tf_action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="top"
-        android:background="@drawable/actionbar_bg"
-        android:gravity="center_vertical">
+    <!--状态栏-->
+    <include layout="@layout/normal_status_bar" />
 
-        <ImageView
-            android:id="@+id/tf_search_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/abc_ic_search" />
-
-        <TextView
-            android:id="@+id/tf_title_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/tf_search_view"
-            android:layout_centerHorizontal="true"
-            android:text="@string/weitao"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/tf_person_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="50dp"
-            android:src="@drawable/tb_icon_follow" />
-
-        <ImageView
-            android:id="@+id/expand_action_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/tb_icon_msg" />
-    </RelativeLayout>
-
-    <!--二级标题栏-->
     <LinearLayout
-        android:id="@+id/tf_tab_bar"
+        android:id="@+id/tf_action_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/iv_weitao_dynamic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/weitao_dynamic" />
-
-            <TextView
-                android:id="@+id/tv_weitao_dynamic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weitao_dynamic"
-                android:textColor="@color/grey"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <!--一级标题栏-->
+        <RelativeLayout
+            android:id="@+id/tf_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="top"
+            android:background="@drawable/actionbar_bg"
+            android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/iv_weitao_new"
+                android:id="@+id/tf_search_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/weitao_new" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/abc_ic_search" />
 
             <TextView
-                android:id="@+id/tv_weitao_new"
+                android:id="@+id/tf_title_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/weitao_new"
-                android:textColor="@color/grey"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+                android:layout_alignBottom="@+id/tf_search_view"
+                android:layout_centerHorizontal="true"
+                android:text="@string/weitao"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/iv_weitao_direct_seeding"
+                android:id="@+id/tf_person_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/weitao_direct_seeding" />
-
-            <TextView
-                android:id="@+id/tv_weitao_direct_seeding"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/weitao_direct_seeding"
-                android:textColor="@color/grey"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="50dp"
+                android:src="@drawable/tb_icon_follow" />
 
             <ImageView
-                android:id="@+id/iv_weitao_hot_topic"
+                android:id="@+id/expand_action_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/weitao_hot_topic" />
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/tb_icon_msg" />
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_weitao_hot_topic"
-                android:layout_width="wrap_content"
+        <!--二级标题栏-->
+        <LinearLayout
+            android:id="@+id/tf_tab_bar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/weitao_hot_topic"
-                android:textColor="@color/grey"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_weitao_dynamic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weitao_dynamic" />
+
+                <TextView
+                    android:id="@+id/tv_weitao_dynamic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weitao_dynamic"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_weitao_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weitao_new" />
+
+                <TextView
+                    android:id="@+id/tv_weitao_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weitao_new"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_weitao_direct_seeding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weitao_direct_seeding" />
+
+                <TextView
+                    android:id="@+id/tv_weitao_direct_seeding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weitao_direct_seeding"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_weitao_hot_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/weitao_hot_topic" />
+
+                <TextView
+                    android:id="@+id/tv_weitao_hot_topic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/weitao_hot_topic"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
