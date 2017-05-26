@@ -29,6 +29,9 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
         ITEM_TYPE_ADDS,
         ITEM_TYPE_CLASSIFY,
         ITEM_TYPE_MARQUEE_TEXT,
+        ITEM_TYPE_RECOMMEND,
+        ITEM_TYPE_FOUR_STYLES,
+        ITEM_TYPE_KINDS,
         ITEM_TYPE_NORMAL
     }
     private SliderLayout layoutTaobao;
@@ -37,7 +40,6 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
     private Activity activity;
     public RecyclerViewDifferentItemTypeAdapter(List datas,Activity activity){
         this.datas = datas;
-
         this.activity = activity;
     }
     @Override
@@ -71,8 +73,14 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
                 contentTwo.setText(content[i*2+1]);
                 ((SingleViewHolder) holder).viewFlipper.addView(view);
             }
+        }else if (holder instanceof RecommendViewHolder){
+            //((RecommendViewHolder) holder).textView.setText("RecommendViewHolder---------------");
+        }else if(holder instanceof FourStylesViewHolder){
+            //((FourStylesViewHolder) holder).textView.setText("FourStylesViewHolder---------------");
+        }else if(holder instanceof  KindsViewHolder){
+            ((KindsViewHolder) holder).textView.setText("KindsViewHolder---------------");
         }else{
-            ((NormalViewHolder) holder).textView.setText(datas.get(position-3)+"");
+            ((NormalViewHolder) holder).textView.setText(datas.get(position-6)+"");
         }
     }
 
@@ -118,6 +126,21 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
                 view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.nav_home_fragment_recyclerview_single,parent,false);
             return new SingleViewHolder(view);
+            case 3:
+//                ITEM_TYPE.ITEM_TYPE_RECOMMEND.ordinal();
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.nav_home_fragment_recyclerview_recommend,parent,false);
+                return new RecommendViewHolder(view);
+            case 4:
+//                ITEM_TYPE.ITEM_TYPE_FOUR_STYLES.ordinal();
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.nav_home_fragment_recyclerview_fourstyles,parent,false);
+                return new FourStylesViewHolder(view);
+            case 5:
+//                ITEM_TYPE.ITEM_TYPE_KINDS.ordinal();
+                view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.nav_home_fragment_recyclerview_kinds,parent,false);
+                return new KindsViewHolder(view);
             default:
                 //ITEM_TYPE.ITEM_TYPE_NORMAL.ordinal();
                 view = LayoutInflater.from(parent.getContext())
@@ -138,6 +161,15 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
                 break;
             case 2:
                 type = ITEM_TYPE.ITEM_TYPE_MARQUEE_TEXT.ordinal();
+                break;
+            case 3:
+                type = ITEM_TYPE.ITEM_TYPE_RECOMMEND.ordinal();
+                break;
+            case 4:
+                type = ITEM_TYPE.ITEM_TYPE_FOUR_STYLES.ordinal();
+                break;
+            case 5:
+                type = ITEM_TYPE.ITEM_TYPE_KINDS.ordinal();
                 break;
             default:
                 type = ITEM_TYPE.ITEM_TYPE_NORMAL.ordinal();
@@ -186,6 +218,27 @@ public class RecyclerViewDifferentItemTypeAdapter extends RecyclerView.Adapter<R
         public SingleViewHolder(View itemView){
             super(itemView);
             viewFlipper = (ViewFlipper) itemView.findViewById(R.id.vf_marquee_text);
+        }
+    }
+    public class RecommendViewHolder extends RecyclerView.ViewHolder{
+        //public TextView textView;
+        public RecommendViewHolder(View itemView){
+            super(itemView);
+            //textView = (TextView) itemView.findViewById(R.id.tv_normal);
+        }
+    }
+    public class FourStylesViewHolder extends RecyclerView.ViewHolder{
+        //public TextView textView;
+        public FourStylesViewHolder(View itemView){
+            super(itemView);
+            //textView = (TextView) itemView.findViewById(R.id.tv_normal);
+        }
+    }
+    public class KindsViewHolder extends RecyclerView.ViewHolder{
+        public TextView textView;
+        public KindsViewHolder(View itemView){
+            super(itemView);
+            textView = (TextView) itemView.findViewById(R.id.tv_normal);
         }
     }
     public class NormalViewHolder extends RecyclerView.ViewHolder{

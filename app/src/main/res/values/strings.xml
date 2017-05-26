@@ -18,6 +18,14 @@
     <string name="nav_home_classify_lingjingbi">领金币</string>
     <string name="nav_home_classify_paimai">拍卖</string>
     <string name="nav_home_classify_fenlei">分类</string>
+    <string name="nav_home_fourstyles_haiqianggou">海抢购</string>
+    <string name="nav_home_fourstyles_youhaohuo">有好货</string>
+    <string name="nav_home_fourstyles_nanshenfan">男神范</string>
+    <string name="nav_home_fourstyles_bimaiqingdai">必买清单</string>
+    <string name="nav_home_fourstyles_getmore">进入查看更多</string>
+    <string name="nav_home_fourstyles_kaiqihaohuodashang">开启好货大赏</string>
+    <string name="nav_home_fourstyles_meizidouainiyo">妹子都爱你哟</string>
+    <string name="nav_home_fourstyles_gouwuquangonglv">购物全攻略</string>
     <!-- home -->
     <!--weitao-->
     <string name="weitao">微淘</string>
