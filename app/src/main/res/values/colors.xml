@@ -5,7 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorStatusBar">#FF8800</color>
 
-    <color name="white">#FFFFFF</color>
+    <color name="green_light">#00FF00</color>
     <color name="grey">#BFBFBF</color>
+    <color name="orange">#FF7000</color>
+    <color name="orange_dark">#FF5000</color>
+    <color name="orange_light">#FF9000</color>
     <color name="unselected_color">#66FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -15,14 +15,14 @@ import com.fuandtan.ftaobao.fragment.NavAskFragment;
 import com.fuandtan.ftaobao.fragment.NavCartFragment;
 import com.fuandtan.ftaobao.fragment.NavHomeFragment;
 import com.fuandtan.ftaobao.fragment.NavMyFragment;
-import com.fuandtan.ftaobao.fragment.NavWeitaoFragment;
+import com.fuandtan.ftaobao.fragment.WeitaoFragment;
 import com.fuandtan.ftaobao.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private NavHomeFragment navHomeFragment;
-    private NavWeitaoFragment navWeitaoFragment;
+    private WeitaoFragment weitaoFragment;
     private NavAskFragment navAskFragment;
     private NavCartFragment navCartFragment;
     private NavMyFragment navMyFragment;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             hideAllFragment(transaction);
             switch (checkedId) {
-                case R.id.rb_nav_home:
+                case R.id.rb_nav_home://首页
                     if (navHomeFragment == null) {
                         navHomeFragment = new NavHomeFragment();
                         transaction.add(R.id.content, navHomeFragment);
@@ -84,16 +84,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                     radioNavHome.startAnimation(navScaleAnim);
                     break;
-                case R.id.rb_nav_weitao:
-                    if (navWeitaoFragment == null) {
-                        navWeitaoFragment = new NavWeitaoFragment();
-                        transaction.add(R.id.content, navWeitaoFragment);
+                case R.id.rb_nav_weitao://微淘
+                    if (weitaoFragment == null) {
+                        weitaoFragment = new WeitaoFragment();
+                        transaction.add(R.id.content, weitaoFragment);
                     } else {
-                        transaction.show(navWeitaoFragment);
+                        transaction.show(weitaoFragment);
                     }
                     radioNavWeitao.startAnimation(navScaleAnim);
                     break;
-                case R.id.rb_nav_ask:
+                case R.id.rb_nav_ask://问大家
                     if (navAskFragment == null) {
                         navAskFragment = new NavAskFragment();
                         transaction.add(R.id.content, navAskFragment);
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     radioNavAsk.startAnimation(navScaleAnim);
                     break;
-                case R.id.rb_nav_cart:
+                case R.id.rb_nav_cart://购物车
                     if (navCartFragment == null) {
                         navCartFragment = new NavCartFragment();
                         transaction.add(R.id.content, navCartFragment);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     radioNavCart.startAnimation(navScaleAnim);
                     break;
-                case R.id.rb_nav_my:
+                case R.id.rb_nav_my://我的淘宝
                     if (navMyFragment == null) {
                         navMyFragment = new NavMyFragment();
                         transaction.add(R.id.content, navMyFragment);
@@ -133,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
         if (navHomeFragment != null) {
             transaction.hide(navHomeFragment);
         }
-        if (navWeitaoFragment != null) {
-            transaction.hide(navWeitaoFragment);
+        if (weitaoFragment != null) {
+            transaction.hide(weitaoFragment);
         }
         if (navAskFragment != null) {
             transaction.hide(navAskFragment);

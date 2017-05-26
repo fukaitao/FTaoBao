@@ -1,9 +1,8 @@
 package com.fuandtan.ftaobao.adapter;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,35 +12,30 @@ import android.widget.TextView;
 import com.fuandtan.ftaobao.R;
 import com.fuandtan.ftaobao.model.WeitaoItem;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
  * Created by Pareto909 on 2017/5/22.
  */
 
-public class WeitaoViewPagerItemAdapter1 extends RecyclerView.Adapter<WeitaoViewPagerItemAdapter1.WeitaoViewHolder> {
-    private Context context;
+public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAdapter.WeitaoViewHolder> {
     private List<WeitaoItem> weitaoItemList;
-    private LayoutInflater layoutInflater;
+    private Context context;
 
-    public WeitaoViewPagerItemAdapter1(Context context, List<WeitaoItem> weitaoItemList) {
-        this.context = context;
+    public WeitaoRecyclerAdapter(List<WeitaoItem> weitaoItemList) {
         this.weitaoItemList = weitaoItemList;
-        layoutInflater = LayoutInflater.from(context);
     }
 
     /**
-     * 初始化ViewHolder中的View
-     *
      * @param parent
      * @param viewType
-     * @return
+     * @return ViewHolder中的View
      */
     @Override
     public WeitaoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.nav_weitao_viewpager_item, parent, false);
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.weitao_item, parent, false);
+        view.setBackgroundResource(R.color.white);
         return new WeitaoViewHolder(view);
     }
 
@@ -61,9 +55,7 @@ public class WeitaoViewPagerItemAdapter1 extends RecyclerView.Adapter<WeitaoView
     }
 
     /**
-     * 返回数据量
-     *
-     * @return
+     * @return 数据量
      */
     @Override
     public int getItemCount() {
