@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,8 @@ public class WeitaoSubFragment extends Fragment {
      * @param itemCount
      * @return
      */
-    public static WeitaoSubFragment createInstance(int itemCount) {
+    public static WeitaoSubFragment newInstance(int itemCount) {
+        Log.d("txxz", "WeitaoSubFragment.newInstance()");
         WeitaoSubFragment weitaoSubFragment = new WeitaoSubFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ITEMS_COUNT_KEY, itemCount);
@@ -42,6 +44,7 @@ public class WeitaoSubFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("txxz", "WeitaoSubFragment.onCreateView()");
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.weitao_viewpager1, container, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setBackgroundResource(R.color.green_light);
@@ -57,6 +60,7 @@ public class WeitaoSubFragment extends Fragment {
      * @return
      */
     private List<WeitaoItem> weitaoItemList() {
+//        Log.d("txxz", "WeitaoSubFragment.weitaoItemList()");
         weitaoItemList = new ArrayList<WeitaoItem>();
         Bundle bundle = getArguments();
         WeitaoItem weitaoItem;
