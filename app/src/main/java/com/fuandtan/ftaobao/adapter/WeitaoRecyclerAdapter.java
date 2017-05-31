@@ -35,7 +35,7 @@ public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAd
     public WeitaoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.weitao_item, parent, false);
-        view.setBackgroundResource(R.color.white);
+        view.setBackgroundResource(R.color.white);// weitao_item背景色
         return new WeitaoViewHolder(view);
     }
 

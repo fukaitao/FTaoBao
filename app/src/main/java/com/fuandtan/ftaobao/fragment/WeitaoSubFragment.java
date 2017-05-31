@@ -47,7 +47,7 @@ public class WeitaoSubFragment extends Fragment {
         Log.d("txxz", "WeitaoSubFragment.onCreateView()");
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.weitao_viewpager1, container, false);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setBackgroundResource(R.color.green_light);
+        recyclerView.setBackgroundResource(R.color.green_light);// weitao_viewpager1背景色
 
         WeitaoRecyclerAdapter weitaoRecyclerAdapter = new WeitaoRecyclerAdapter(weitaoItemList());
         recyclerView.setAdapter(weitaoRecyclerAdapter);

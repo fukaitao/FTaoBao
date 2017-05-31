@@ -25,7 +25,7 @@ public class WeitaoFragment extends Fragment {
     // 正文页卡布局
     private ViewPager viewPager;
     private WeitaoFragmentPagerAdapter weitaoFragmentPagerAdapter;
-    private int[] iconRidSelected, iconRidUnselected;
+    private int[] titleRid, iconRidSelected, iconRidUnselected;
 
     /**
      * fragment 生命周期：
@@ -49,6 +49,7 @@ public class WeitaoFragment extends Fragment {
     }
 
     private void initData() {
+        titleRid = new int[]{R.string.weitao_dynamic, R.string.weitao_new, R.string.weitao_direct_seeding, R.string.weitao_hot_topic};
         iconRidUnselected = new int[]{R.drawable.weitao_dynamic_normal, R.drawable.weitao_new_normal, R.drawable.weitao_direct_seeding_normal, R.drawable.weitao_hot_topic_normal};
         iconRidSelected = new int[]{R.drawable.weitao_dynamic_selected, R.drawable.weitao_new_selected, R.drawable.weitao_direct_seeding_selected, R.drawable.weitao_hot_topic_selected};
     }
@@ -79,7 +80,7 @@ public class WeitaoFragment extends Fragment {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) weitaoView.findViewById(R.id.coordinatorLayout);
         coordinatorLayout.setFitsSystemWindows(true);
 //        coordinatorLayout.setStatusBarBackgroundResource(R.drawable.actionbar_bg);//失效，原因不明
-        coordinatorLayout.setBackgroundResource(R.drawable.actionbar_bg);
+        coordinatorLayout.setBackgroundResource(R.drawable.actionbar_bg);// WeitaoFragment背景色
     }
 
     /**
@@ -89,8 +90,8 @@ public class WeitaoFragment extends Fragment {
         Log.d("txxz", "WeitaoFragment.initToolbar()");
         toolbar = (Toolbar) weitaoView.findViewById(R.id.tf_action_bar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        getActivity().setTitle(R.string.weitao);
-        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));
+//        toolbar.setTitle(R.string.weitao);// 被xml配置文件属性所覆盖
+//        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));// 被xml配置文件属性所覆盖
     }
 
     /**
@@ -100,10 +101,10 @@ public class WeitaoFragment extends Fragment {
         Log.d("txxz", "WeitaoFragment.initViewPagerAndTabs()");
         viewPager = (ViewPager) weitaoView.findViewById(R.id.viewPager);
         weitaoFragmentPagerAdapter = new WeitaoFragmentPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(9), getActivity().getResources().getString(R.string.weitao_dynamic));
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(666), getActivity().getResources().getString(R.string.weitao_new));
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(6), getActivity().getResources().getString(R.string.weitao_direct_seeding));
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(2), getActivity().getResources().getString(R.string.weitao_hot_topic));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(9), getActivity().getResources().getString(titleRid[0]));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(666), getActivity().getResources().getString(titleRid[1]));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(6), getActivity().getResources().getString(titleRid[2]));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(2), getActivity().getResources().getString(titleRid[3]));
         viewPager.setAdapter(weitaoFragmentPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) weitaoView.findViewById(R.id.tf_tab_bar);
@@ -116,13 +117,14 @@ public class WeitaoFragment extends Fragment {
      *
      * @param tabLayout
      */
-    private void tabLayoutIconSwitch(TabLayout tabLayout) {
+    private void tabLayoutIconSwitch(final TabLayout tabLayout) {
         initTabIcon(tabLayout);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 Log.d("txxz", "WeitaoFragment.tabLayoutIconSwitch().OnTabSelectedListener().onTabSelected()--" + tab.getPosition());
                 tab.setIcon(getActivity().getResources().getDrawable(iconRidSelected[tab.getPosition()]));
+                viewPager.setCurrentItem(tab.getPosition());// 点击tabLayout切换view
             }
 
             @Override
