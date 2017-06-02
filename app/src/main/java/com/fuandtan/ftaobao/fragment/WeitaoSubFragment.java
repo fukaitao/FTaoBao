@@ -17,6 +17,8 @@ import com.fuandtan.ftaobao.model.WeitaoItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.fuandtan.ftaobao.R.id.recyclerView;
+
 /**
  * Created by zexin.tan on 2017/5/25.
  */
@@ -41,26 +43,18 @@ public class WeitaoSubFragment extends Fragment {
         return weitaoSubFragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("txxz", "WeitaoSubFragment.onCreateView()");
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.weitao_viewpager1, container, false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setBackgroundResource(R.color.green_light);// weitao_viewpager1背景色
-
-        WeitaoRecyclerAdapter weitaoRecyclerAdapter = new WeitaoRecyclerAdapter(weitaoItemList());
-        recyclerView.setAdapter(weitaoRecyclerAdapter);
-        return recyclerView;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("txxz", "WeitaoSubFragment.onCreate()");
+        initData();
     }
 
     /**
-     * 初始化subFragment数据
-     *
-     * @return
+     * 初始化数据
      */
-    private List<WeitaoItem> weitaoItemList() {
-//        Log.d("txxz", "WeitaoSubFragment.weitaoItemList()");
+    private void initData() {
+        Log.d("txxz", "WeitaoSubFragment.initData()");
         weitaoItemList = new ArrayList<WeitaoItem>();
         Bundle bundle = getArguments();
         WeitaoItem weitaoItem;
@@ -73,6 +67,27 @@ public class WeitaoSubFragment extends Fragment {
             weitaoItem = new WeitaoItem(R.drawable.ic_launcher, "第" + str + "项", "标题" + str, "副标题" + str);
             weitaoItemList.add(weitaoItem);
         }
-        return weitaoItemList;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("txxz", "WeitaoSubFragment.onCreateView()");
+        View view = inflater.inflate(R.layout.weitao_viewpager1, container, false);
+        initView(view);
+        return view;
+    }
+
+    /**
+     * 初始化布局
+     */
+    private void initView(View view) {
+        Log.d("txxz", "WeitaoSubFragment.initView()");
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setBackgroundResource(R.color.green_light);// weitao_viewpager1背景色
+
+        WeitaoRecyclerAdapter weitaoRecyclerAdapter = new WeitaoRecyclerAdapter(weitaoItemList);
+        recyclerView.setAdapter(weitaoRecyclerAdapter);
     }
 }

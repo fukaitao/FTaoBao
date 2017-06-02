@@ -16,15 +16,7 @@ import com.fuandtan.ftaobao.R;
 import com.fuandtan.ftaobao.adapter.WeitaoFragmentPagerAdapter;
 
 public class WeitaoFragment extends Fragment {
-    // 总布局
-    private View weitaoView;
-
-    // 标题栏布局
-    private Toolbar toolbar;
-
     // 正文页卡布局
-    private ViewPager viewPager;
-    private WeitaoFragmentPagerAdapter weitaoFragmentPagerAdapter;
     private int[] titleRid, iconRidSelected, iconRidUnselected;
 
     /**
@@ -48,6 +40,9 @@ public class WeitaoFragment extends Fragment {
         initData();
     }
 
+    /**
+     * 初始化数据
+     */
     private void initData() {
         titleRid = new int[]{R.string.weitao_dynamic, R.string.weitao_new, R.string.weitao_direct_seeding, R.string.weitao_hot_topic};
         iconRidUnselected = new int[]{R.drawable.weitao_dynamic_normal, R.drawable.weitao_new_normal, R.drawable.weitao_direct_seeding_normal, R.drawable.weitao_hot_topic_normal};
@@ -60,24 +55,27 @@ public class WeitaoFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("txxz", "WeitaoFragment.onCreateView()");
         // 总布局实例化
-        weitaoView = inflater.inflate(R.layout.weitao_fragment, container, false);
-        initView();//初始化布局
-        return weitaoView;
+        View view = inflater.inflate(R.layout.weitao_fragment, container, false);
+        initView(view);
+        return view;
     }
 
-    private void initView() {
+    /**
+     * 初始化布局
+     */
+    private void initView(View view) {
         Log.d("txxz", "WeitaoFragment.initView()");
-        initStatusBar();
-        initToolbar();
-        initViewPagerAndTabs();
+        initStatusBar(view);
+        initToolbar(view);
+        initViewPagerAndTabs(view);
     }
 
     /**
      * 初始化状态栏
      */
-    private void initStatusBar() {
+    private void initStatusBar(View view) {
         Log.d("txxz", "WeitaoFragment.initStatusBar()");
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) weitaoView.findViewById(R.id.coordinatorLayout);
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinatorLayout);
         coordinatorLayout.setFitsSystemWindows(true);
 //        coordinatorLayout.setStatusBarBackgroundResource(R.drawable.actionbar_bg);//失效，原因不明
         coordinatorLayout.setBackgroundResource(R.drawable.actionbar_bg);// WeitaoFragment背景色
@@ -86,9 +84,9 @@ public class WeitaoFragment extends Fragment {
     /**
      * 初始化Toolbar
      */
-    private void initToolbar() {
+    private void initToolbar(View view) {
         Log.d("txxz", "WeitaoFragment.initToolbar()");
-        toolbar = (Toolbar) weitaoView.findViewById(R.id.tf_action_bar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.tf_action_bar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        toolbar.setTitle(R.string.weitao);// 被xml配置文件属性所覆盖
 //        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));// 被xml配置文件属性所覆盖
@@ -97,19 +95,19 @@ public class WeitaoFragment extends Fragment {
     /**
      * 初始化页卡
      */
-    private void initViewPagerAndTabs() {
+    private void initViewPagerAndTabs(View view) {
         Log.d("txxz", "WeitaoFragment.initViewPagerAndTabs()");
-        viewPager = (ViewPager) weitaoView.findViewById(R.id.viewPager);
-        weitaoFragmentPagerAdapter = new WeitaoFragmentPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+        WeitaoFragmentPagerAdapter weitaoFragmentPagerAdapter = new WeitaoFragmentPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(9), getActivity().getResources().getString(titleRid[0]));
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(666), getActivity().getResources().getString(titleRid[1]));
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(6), getActivity().getResources().getString(titleRid[2]));
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(2), getActivity().getResources().getString(titleRid[3]));
         viewPager.setAdapter(weitaoFragmentPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) weitaoView.findViewById(R.id.tf_tab_bar);
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tf_tab_bar);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayoutIconSwitch(tabLayout);
+        tabLayoutIconSwitch(viewPager, tabLayout);
     }
 
     /**
@@ -117,7 +115,7 @@ public class WeitaoFragment extends Fragment {
      *
      * @param tabLayout
      */
-    private void tabLayoutIconSwitch(final TabLayout tabLayout) {
+    private void tabLayoutIconSwitch(final ViewPager viewPager, final TabLayout tabLayout) {
         initTabIcon(tabLayout);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
