@@ -27,10 +27,19 @@
     <string name="nav_home_fourstyles_meizidouainiyo">妹子都爱你哟</string>
     <string name="nav_home_fourstyles_gouwuquangonglv">购物全攻略</string>
     <!-- home -->
+
     <!--weitao-->
     <string name="weitao">微淘</string>
     <string name="weitao_dynamic">关注动态</string>
     <string name="weitao_new">宝贝上新</string>
     <string name="weitao_direct_seeding">视频直播</string>
     <string name="weitao_hot_topic">精选热榜</string>
+    <!--weitao-->
+
+    <!--weitao_refresh-->
+    <string name="down_pull_refresh">下拉刷新</string>
+    <string name="data_load_completed">数据加载完毕</string>
+    <string name="release_refresh">松开刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <!--weitao_refresh-->
 </resources>

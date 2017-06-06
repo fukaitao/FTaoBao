@@ -99,9 +99,9 @@ public class WeitaoFragment extends Fragment {
         Log.d("txxz", "WeitaoFragment.initViewPagerAndTabs()");
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         WeitaoFragmentPagerAdapter weitaoFragmentPagerAdapter = new WeitaoFragmentPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(9), getActivity().getResources().getString(titleRid[0]));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(5), getActivity().getResources().getString(titleRid[0]));
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(666), getActivity().getResources().getString(titleRid[1]));
-        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(6), getActivity().getResources().getString(titleRid[2]));
+        weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(9), getActivity().getResources().getString(titleRid[2]));
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(2), getActivity().getResources().getString(titleRid[3]));
         viewPager.setAdapter(weitaoFragmentPagerAdapter);
 
