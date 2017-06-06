@@ -43,22 +43,33 @@ public class WeitaoListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null)
+        ViewHolder holder = null;
+        if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.weitao_item, null);
+            holder = new ViewHolder();
+            holder.iv_photo = (ImageView) convertView.findViewById(R.id.iv_photo);
+            holder.tv_username = (TextView) convertView.findViewById(R.id.tv_username);
+            holder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
+            holder.tv_subtitle = (TextView) convertView.findViewById(R.id.tv_subtitle);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
         convertView.setBackgroundResource(R.color.white);
 
-        ImageView iv_photo = (ImageView) convertView.findViewById(R.id.iv_photo);
-        TextView tv_username = (TextView) convertView.findViewById(R.id.tv_username);
-        TextView tv_title = (TextView) convertView.findViewById(R.id.tv_title);
-        TextView tv_subtitle = (TextView) convertView.findViewById(R.id.tv_subtitle);
-
         WeitaoItem weitaoItem = weitaoItemList.get(position);
-        iv_photo.setImageResource(weitaoItem.getPhotoId());
-        tv_username.setText(weitaoItem.getUsername());
-        tv_title.setText(weitaoItem.getTitle());
-        tv_subtitle.setText(weitaoItem.getSubTitle());
+        holder.iv_photo.setImageResource(weitaoItem.getPhotoId());
+        holder.tv_username.setText(weitaoItem.getUsername());
+        holder.tv_title.setText(weitaoItem.getTitle());
+        holder.tv_subtitle.setText(weitaoItem.getSubTitle());
 
         return convertView;
     }
 
+    class ViewHolder {
+        ImageView iv_photo;
+        TextView tv_username;
+        TextView tv_title;
+        TextView tv_subtitle;
+    }
 }
