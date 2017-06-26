@@ -16,6 +16,9 @@ import com.fuandtan.ftaobao.R;
 import com.fuandtan.ftaobao.adapter.WeitaoFragmentPagerAdapter;
 
 public class WeitaoFragment extends Fragment {
+    private static final boolean DEBUG = false;
+    private static final String TAG = "WEITAO";
+
     // 正文页卡布局
     private int[] titleRid, iconRidSelected, iconRidUnselected;
 
@@ -36,7 +39,7 @@ public class WeitaoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("txxz", "WeitaoFragment.onCreate()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.onCreate()");
         initData();
     }
 
@@ -44,6 +47,7 @@ public class WeitaoFragment extends Fragment {
      * 初始化数据
      */
     private void initData() {
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initData()");
         titleRid = new int[]{R.string.weitao_dynamic, R.string.weitao_new, R.string.weitao_direct_seeding, R.string.weitao_hot_topic};
         iconRidUnselected = new int[]{R.drawable.weitao_dynamic_normal, R.drawable.weitao_new_normal, R.drawable.weitao_direct_seeding_normal, R.drawable.weitao_hot_topic_normal};
         iconRidSelected = new int[]{R.drawable.weitao_dynamic_selected, R.drawable.weitao_new_selected, R.drawable.weitao_direct_seeding_selected, R.drawable.weitao_hot_topic_selected};
@@ -53,7 +57,7 @@ public class WeitaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("txxz", "WeitaoFragment.onCreateView()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.onCreateView()");
         // 总布局实例化
         View view = inflater.inflate(R.layout.weitao_fragment, container, false);
         initView(view);
@@ -64,7 +68,7 @@ public class WeitaoFragment extends Fragment {
      * 初始化布局
      */
     private void initView(View view) {
-        Log.d("txxz", "WeitaoFragment.initView()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initView()");
         initStatusBar(view);
         initToolbar(view);
         initViewPagerAndTabs(view);
@@ -74,29 +78,29 @@ public class WeitaoFragment extends Fragment {
      * 初始化状态栏
      */
     private void initStatusBar(View view) {
-        Log.d("txxz", "WeitaoFragment.initStatusBar()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initStatusBar()");
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.coordinatorLayout);
         coordinatorLayout.setFitsSystemWindows(true);
-//        coordinatorLayout.setStatusBarBackgroundResource(R.drawable.actionbar_bg);//失效，原因不明
-        coordinatorLayout.setBackgroundResource(R.drawable.actionbar_bg);// WeitaoFragment背景色
+//        coordinatorLayout.setStatusBarBackgroundResource(R.drawable.actionbar_bg);//useless without reason
+        coordinatorLayout.setBackgroundResource(R.drawable.actionbar_bg);// the background color of the WeitaoFragment
     }
 
     /**
      * 初始化Toolbar
      */
     private void initToolbar(View view) {
-        Log.d("txxz", "WeitaoFragment.initToolbar()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initToolbar()");
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.tf_action_bar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        toolbar.setTitle(R.string.weitao);// 被xml配置文件属性所覆盖
-//        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));// 被xml配置文件属性所覆盖
+//        toolbar.setTitle(R.string.weitao);// covered by the property of the XML configuration file
+//        toolbar.setTitleTextColor(getActivity().getResources().getColor(R.color.white));// covered by the property of the XML configuration file
     }
 
     /**
      * 初始化页卡
      */
     private void initViewPagerAndTabs(View view) {
-        Log.d("txxz", "WeitaoFragment.initViewPagerAndTabs()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initViewPagerAndTabs()");
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         WeitaoFragmentPagerAdapter weitaoFragmentPagerAdapter = new WeitaoFragmentPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
         weitaoFragmentPagerAdapter.addFragment(WeitaoSubFragment.newInstance(5), getActivity().getResources().getString(titleRid[0]));
@@ -116,24 +120,28 @@ public class WeitaoFragment extends Fragment {
      * @param tabLayout
      */
     private void tabLayoutIconSwitch(final ViewPager viewPager, final TabLayout tabLayout) {
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.tabLayoutIconSwitch()");
         initTabIcon(tabLayout);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.d("txxz", "WeitaoFragment.tabLayoutIconSwitch().OnTabSelectedListener().onTabSelected()--" + tab.getPosition());
+                if (DEBUG)
+                    Log.d(TAG, "WeitaoFragment.tabLayoutIconSwitch()--onTabSelected()--" + tab.getPosition());
                 tab.setIcon(getActivity().getResources().getDrawable(iconRidSelected[tab.getPosition()]));
                 viewPager.setCurrentItem(tab.getPosition());// 点击tabLayout切换view
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Log.d("txxz", "WeitaoFragment.tabLayoutIconSwitch().OnTabSelectedListener().onTabUnselected()--" + tab.getPosition());
+                if (DEBUG)
+                    Log.d(TAG, "WeitaoFragment.tabLayoutIconSwitch()--onTabUnselected()--" + tab.getPosition());
                 tab.setIcon(getActivity().getResources().getDrawable(iconRidUnselected[tab.getPosition()]));
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                Log.d("txxz", "WeitaoFragment.tabLayoutIconSwitch().OnTabSelectedListener().onTabReselected()--" + tab.getPosition());
+                if (DEBUG)
+                    Log.d(TAG, "WeitaoFragment.tabLayoutIconSwitch()--onTabReselected()--" + tab.getPosition());
             }
         });
     }
@@ -144,7 +152,7 @@ public class WeitaoFragment extends Fragment {
      * @param tabLayout
      */
     private void initTabIcon(TabLayout tabLayout) {
-        Log.d("txxz", "WeitaoFragment.initTabIcon()");
+        if (DEBUG) Log.d(TAG, "WeitaoFragment.initTabIcon()");
         for (int i = 0; i < tabLayout.getTabCount(); i++)
             if (i == tabLayout.getSelectedTabPosition())
                 tabLayout.getTabAt(i).setIcon(getActivity().getResources().getDrawable(iconRidSelected[i]));

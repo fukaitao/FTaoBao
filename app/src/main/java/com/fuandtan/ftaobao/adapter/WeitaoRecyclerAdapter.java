@@ -19,10 +19,14 @@ import java.util.List;
  */
 
 public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAdapter.WeitaoViewHolder> {
+    private static final boolean DEBUG = false;
+    private static final String TAG = "WEITAO";
+
     private List<WeitaoItem> weitaoItemList;
     private Context context;
 
     public WeitaoRecyclerAdapter(List<WeitaoItem> weitaoItemList) {
+        if (DEBUG) Log.d(TAG, "WeitaoRecyclerAdapter.WeitaoRecyclerAdapter()");
         this.weitaoItemList = weitaoItemList;
     }
 
@@ -33,6 +37,7 @@ public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAd
      */
     @Override
     public WeitaoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (DEBUG) Log.d(TAG, "WeitaoRecyclerAdapter.WeitaoViewHolder()");
         context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.weitao_item, parent, false);
         view.setBackgroundResource(R.color.white);// weitao_item背景色
@@ -47,6 +52,7 @@ public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAd
      */
     @Override
     public void onBindViewHolder(WeitaoViewHolder holder, int position) {
+        if (DEBUG) Log.d(TAG, "WeitaoRecyclerAdapter.onBindViewHolder()");
         WeitaoItem weitaoItem = weitaoItemList.get(position);
         holder.iv_photo.setImageResource(weitaoItem.getPhotoId());
         holder.tv_username.setText(weitaoItem.getUsername());
@@ -59,6 +65,7 @@ public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAd
      */
     @Override
     public int getItemCount() {
+        if (DEBUG) Log.d(TAG, "WeitaoRecyclerAdapter.getItemCount()");
         return null == weitaoItemList ? 0 : weitaoItemList.size();
     }
 
@@ -73,6 +80,7 @@ public class WeitaoRecyclerAdapter extends RecyclerView.Adapter<WeitaoRecyclerAd
 
         public WeitaoViewHolder(View itemView) {
             super(itemView);
+            if (DEBUG) Log.d(TAG, "WeitaoRecyclerAdapter.WeitaoViewHolder.WeitaoViewHolder()");
             iv_photo = (ImageView) itemView.findViewById(R.id.iv_photo);
             tv_username = (TextView) itemView.findViewById(R.id.tv_username);
             tv_title = (TextView) itemView.findViewById(R.id.tv_title);

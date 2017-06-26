@@ -27,6 +27,9 @@ import java.util.List;
  */
 
 public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
+    private static final boolean DEBUG = false;
+    private static final String TAG = "WEITAO";
+
     public static String ITEMS_COUNT_KEY = "WeitaoSubFragment$ItemsCount";
     // 页卡属性
     private WeitaoRefreshListView weitaoRefreshListView;
@@ -41,7 +44,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
      * @return
      */
     public static WeitaoSubFragment newInstance(int itemCount) {
-        Log.d("txxz", "WeitaoSubFragment.newInstance()");
+        if (DEBUG) Log.d(TAG, "WeitaoSubFragment.newInstance()");
         WeitaoSubFragment weitaoSubFragment = new WeitaoSubFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ITEMS_COUNT_KEY, itemCount);
@@ -52,7 +55,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("txxz", "WeitaoSubFragment.onCreate()");
+        if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onCreate()");
         initData();
     }
 
@@ -60,7 +63,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
      * 初始化数据
      */
     private void initData() {
-        Log.d("txxz", "WeitaoSubFragment.initData()");
+        if (DEBUG) Log.d(TAG, "WeitaoSubFragment.initData()");
         weitaoItemList = new ArrayList<WeitaoItem>();
         Bundle bundle = getArguments();
         int itemCount = 0;
@@ -77,7 +80,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("txxz", "WeitaoSubFragment.onCreateView()");
+        if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onCreateView()");
         View view = inflater.inflate(R.layout.weitao_viewpager1, container, false);
         initView(view);
         return view;
@@ -87,7 +90,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
      * 初始化布局
      */
     private void initView(View view) {
-        Log.d("txxz", "WeitaoSubFragment.initView()");
+        if (DEBUG) Log.d(TAG, "WeitaoSubFragment.initView()");
 //        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        recyclerView.setBackgroundResource(R.color.green_light);// weitao_viewpager1背景色
@@ -106,7 +109,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                Log.d("txxz", "WeitaoSubFragment.onDownPullRefresh()--doInBackground");
+                if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onDownPullRefresh()--doInBackground()");
                 SystemClock.sleep(2000);
                 String str;
                 for (int i = 1; i < 3; i++) {
@@ -120,7 +123,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                Log.d("txxz", "WeitaoSubFragment.onDownPullRefresh()--onPostExecute");
+                if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onDownPullRefresh()--onPostExecute()");
                 weitaoListViewAdapter.notifyDataSetChanged();
                 weitaoRefreshListView.hideHeaderView();// 控制头布局隐藏
             }
@@ -132,7 +135,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                Log.d("txxz", "WeitaoSubFragment.onLoadingMore()--doInBackground");
+                if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onLoadingMore()--doInBackground()");
                 SystemClock.sleep(1000);
                 String str;
                 for (int i = 1; i < 4; i++) {
@@ -146,7 +149,7 @@ public class WeitaoSubFragment extends Fragment implements OnRefreshListener {
 
             @Override
             protected void onPostExecute(Void result) {
-                Log.d("txxz", "WeitaoSubFragment.onLoadingMore()--onPostExecute");
+                if (DEBUG) Log.d(TAG, "WeitaoSubFragment.onLoadingMore()--onPostExecute()");
                 weitaoListViewAdapter.notifyDataSetChanged();
                 weitaoRefreshListView.hideFooterView();// 控制脚布局隐藏
             }
